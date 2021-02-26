@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">TestExcercise</string>
+    <string name="enter_first_name">Enter First Name</string>
+    <string name="submit">Submit</string>
+    <string name="enter_last_name">Enter Last Name</string>
+    <string name="oops_please_check_the_connectivity">Oops!! Please check the connectivity and click on Try Again</string>
+</resources>
