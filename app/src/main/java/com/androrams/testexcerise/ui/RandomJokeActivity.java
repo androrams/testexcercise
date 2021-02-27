@@ -2,17 +2,12 @@ package com.androrams.testexcerise.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.Nullable;
 import androidx.core.util.Supplier;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.LinearSnapHelper;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.recyclerview.widget.SnapHelper;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.androrams.testexcerise.R;
@@ -42,7 +37,6 @@ public class RandomJokeActivity extends BaseActivity<ActivityRandomJokeBinding> 
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //setupRecyclerView();
         Intent intent = getIntent();
         if (intent != null) {
             firstName = intent.getStringExtra(KEY_FIRST_NAME);
@@ -70,41 +64,6 @@ public class RandomJokeActivity extends BaseActivity<ActivityRandomJokeBinding> 
                 }
             }
         });
-
-    }
-
-    private void setupRecyclerView() {
-
-        layoutManager = new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false);
-        binding.jokesRecyclerView.setLayoutManager(layoutManager);
-
-
-        adapter = new JokeAdapter(getViewModel());
-        binding.jokesRecyclerView.setAdapter(adapter);
-        binding.jokesRecyclerView.setItemAnimator(new DefaultItemAnimator());
-
-        binding.jokesRecyclerView.addOnScrollListener(new RecyclerScrollingListener() {
-            @Override
-            public void loadNextJoke() {
-                Map<String, String> params = new HashMap<>();
-                params.put(KEY_FIRST_NAME, firstName);
-                params.put(KEY_LAST_NAME, lastName);
-                params.put(KEY_LIMIT_TO, "nerdy");
-                getViewModel().getRandomJoke(params);
-            }
-
-            @Override
-            public JokeAdapter getAdapter() {
-                return adapter;
-            }
-
-            @Override
-            public LinearLayoutManager getLayoutManager() {
-                return layoutManager;
-            }
-        });
-        SnapHelper snapHelper = new LinearSnapHelper();
-        snapHelper.attachToRecyclerView(binding.jokesRecyclerView);
 
     }
 
